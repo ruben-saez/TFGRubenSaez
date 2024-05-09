@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "894237224459",
+    "project_id": "tfgrubensaez",
+    "storage_bucket": "tfgrubensaez.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:894237224459:android:1a53939b6eeafaf6d0610e",
+        "android_client_info": {
+          "package_name": "com.example.tfgrubensaez"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQv71bxIN8ZxwmND0SlLUuz-oGArefe2s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

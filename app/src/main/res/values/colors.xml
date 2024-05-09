@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#142b53</color> <!-- Color primario -->
+    <color name="colorPrimaryDark">#000000</color> <!-- Color primario oscuro -->
+    <color name="colorAccent">#D6E6E6</color> <!-- Color de acento -->
+    <color name="colorBackground">#F0ECE3</color> <!-- Color de fondo -->
+    <color name="colorBackgroundDark">#454443</color> <!-- Color de fondo oscuro -->
+    <color name="colorText">#2B2D42</color> <!-- Color de texto -->
+    <color name="white">#FFFFFFFF</color>
+    <color name="black">#000000</color>
+</resources>
