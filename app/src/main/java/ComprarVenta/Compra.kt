@@ -4,11 +4,13 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -18,7 +20,14 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.example.tfgrubensaez.R
 import com.example.tfgrubensaez.databinding.ActivityCompraBinding
+import com.example.tfgrubensaez.registro.Registrarse
+import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.FirebaseFirestore
+import java.io.ByteArrayOutputStream
 import kotlin.math.roundToInt
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.storage.FirebaseStorage
+
 
 class Compra : AppCompatActivity() {
     private val PICK_IMAGE_REQUEST = 1
@@ -27,7 +36,10 @@ class Compra : AppCompatActivity() {
     private lateinit var selectedTalla: String
     private lateinit var selectedImpresion: String
 
+    private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
     lateinit var binding: ActivityCompraBinding
+    lateinit var imagenSeleccionadaBitmap: Bitmap
+    private lateinit var imagenSeleccionada: Bitmap
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_compra)
@@ -197,26 +209,35 @@ class Compra : AppCompatActivity() {
 
 
         binding.compra.setOnClickListener {
-            val correo = intent.getStringExtra("correo") ?: ""
-            val contenidoCorreo = "Detalles de la compra:\n" +
-                    "Color: $selectedColor\n" +
-                    "Material: $selectedMaterial\n" +
-                    "Talla: $selectedTalla\n" +
-                    "Impresión: $selectedImpresion"
+            val auth = FirebaseAuth.getInstance()
+            val usuarioActual = auth.currentUser
+            if (usuarioActual != null) {
+                val correo = usuarioActual.email // Obtener el correo electrónico del usuario
+                val precioTotal = binding.precioCamiseta.text.toString() // Obtener el precio total del TextView
+                val contenidoCorreo = "Detalles de la compra:\n" +
+                        "Correo: $correo\n" + // Agregar el correo electrónico al correo
+                        "Color: $selectedColor\n" +
+                        "Material: $selectedMaterial\n" +
+                        "Talla: $selectedTalla\n" +
+                        "Impresión: $selectedImpresion\n" +
+                        "Precio total: $precioTotal"
 
-            val intentCorreo = Intent(Intent.ACTION_SENDTO).apply {
-                data = Uri.parse("mailto:$correo")
-                putExtra(Intent.EXTRA_SUBJECT, "Detalles de la compra de tu camiseta")
-                putExtra(Intent.EXTRA_TEXT, contenidoCorreo)
-            }
+                guardarImagenCompraEnFirebase(correo!!, contenidoCorreo)
 
-            if (intentCorreo.resolveActivity(packageManager) != null) {
-                startActivity(intentCorreo)
+                val intent = Intent(this@Compra, Vendida::class.java)
+                startActivity(intent)
+
+
             } else {
-                // Manejar caso en que no haya aplicaciones de correo electrónico disponibles
-                Toast.makeText(this, "No se encontró una aplicación de correo electrónico", Toast.LENGTH_SHORT).show()
+
+                Toast.makeText(this, "Usuario no autenticado", Toast.LENGTH_SHORT).show()
             }
         }
+
+
+
+
+
 
     }
     private fun openGallery() {
@@ -227,18 +248,76 @@ class Compra : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null) {
+        Log.d("ActivityResult", "requestCode: $requestCode, resultCode: $resultCode")
 
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null) {
             val imageUri = data.data
             try {
-
                 val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, imageUri)
 
                 binding.ImagenCompra.setImageBitmap(bitmap)
+
             } catch (e: Exception) {
                 e.printStackTrace()
+            }
+        } else {
+            // Mostrar el mensaje de error solo si no se seleccionó ninguna imagen
+            Toast.makeText(this, "No se ha seleccionado ninguna imagen", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+
+
+    private fun guardarImagenCompraEnFirebase(correo: String, contenidoCorreo: String) {
+        val auth = FirebaseAuth.getInstance()
+        val usuarioActual = auth.currentUser
+
+        if (usuarioActual != null) {
+            val userId = usuarioActual.uid
+
+            val imagenBitmap = (binding.ImagenCompra.drawable as BitmapDrawable).bitmap
+
+            val bytesImagen = bitmapToByteArray(imagenBitmap)
+
+            val storageReference = FirebaseStorage.getInstance().reference
+
+            val imageRef = storageReference.child("images/$userId/${System.currentTimeMillis()}.jpg")
+
+            val uploadTask = imageRef.putBytes(bytesImagen)
+            uploadTask.addOnSuccessListener { taskSnapshot ->
+
+                // Obtener la URL de la imagen en Firebase Storage
+                imageRef.downloadUrl.addOnSuccessListener { uri ->
+
+                    val imageUrl = uri.toString()
+
+                    // Actualizar Firestore con la URL de la imagen
+                    val datosPedido = hashMapOf(
+                        "Correo" to correo,
+                        "Contenido" to contenidoCorreo,
+                        "Imagen" to imageUrl
+                    )
+
+                    db.collection("Pedidos")
+                        .add(datosPedido)
+                        .addOnSuccessListener {
+                            Toast.makeText(this, "Pedido realizado", Toast.LENGTH_SHORT).show()
+                        }
+                        .addOnFailureListener { e ->
+                            Toast.makeText(this, "Error al realizar el pedido: ${e.message}", Toast.LENGTH_SHORT).show()
+                        }
+
+
+
+
+                }
             }
         }
     }
 
+    private fun bitmapToByteArray(bitmap: Bitmap): ByteArray {
+        val stream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
+        return stream.toByteArray()
+    }
 }

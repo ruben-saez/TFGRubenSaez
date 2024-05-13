@@ -63,7 +63,29 @@
                     android:textSize="16sp"/>
 
             </androidx.cardview.widget.CardView>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                />
 
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp">
+
+                <Button
+                    android:id="@+id/btnOpcion5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Pedidos"
+                    android:background="#142b53"
+                    android:padding="16dp"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp"/>
+
+            </androidx.cardview.widget.CardView>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"

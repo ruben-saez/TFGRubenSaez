@@ -78,6 +78,12 @@ class Registrarse : AppCompatActivity() {
             startActivity(intent)
 
         }
+        binding.btnOpcion5.setOnClickListener(){
+            val intent = Intent(this@Registrarse, ComprarVenta.Pedidos::class.java)
+            intent.putExtra("correo", correo)
+            startActivity(intent)
+
+        }
         binding.MenuDes.setOnClickListener {
             toggleMenu()
         }
