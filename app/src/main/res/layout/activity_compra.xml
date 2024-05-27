@@ -5,8 +5,19 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondo"
+    android:background="@drawable/fondoprueba5"
     tools:context="ComprarVenta.Compra">
+    <View
+        android:id="@+id/view7"
+        android:layout_width="408dp"
+        android:layout_height="0dp"
+        android:background="#142b53"
+        android:alpha="0.4"
+        app:layout_constraintBottom_toTopOf="@+id/view6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fondoCamiseta" />
 
     <ImageView
         android:id="@+id/fondoCamiseta"
@@ -44,6 +55,9 @@
         android:layout_height="27dp"
         android:layout_marginStart="116dp"
         android:layout_marginTop="20dp"
+
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/camiseta" />
 
@@ -53,6 +67,8 @@
         android:layout_height="27dp"
         android:layout_marginStart="116dp"
         android:layout_marginTop="22dp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerColor" />
 
@@ -62,6 +78,8 @@
         android:layout_height="27dp"
         android:layout_marginStart="116dp"
         android:layout_marginTop="22dp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerMaterial" />
 
@@ -71,6 +89,8 @@
         android:layout_height="27dp"
         android:layout_marginStart="116dp"
         android:layout_marginTop="22dp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerTallas" />
 
@@ -81,7 +101,9 @@
         android:layout_marginStart="28dp"
         android:layout_marginTop="20dp"
         android:text="Color:"
+        android:textColor="#FFFFFF"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/camiseta" />
 
@@ -92,7 +114,9 @@
         android:layout_marginStart="28dp"
         android:layout_marginTop="22dp"
         android:text="Material:"
+        android:textColor="#FFFFFF"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
@@ -103,7 +127,9 @@
         android:layout_marginStart="28dp"
         android:layout_marginTop="22dp"
         android:text="Talla:"
+        android:textColor="#FFFFFF"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -114,7 +140,9 @@
         android:layout_marginStart="28dp"
         android:layout_marginTop="22dp"
         android:text="Impresión:"
+        android:textColor="#FFFFFF"
         android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
@@ -125,6 +153,8 @@
         android:layout_marginTop="396dp"
         android:layout_marginEnd="16dp"
         android:elevation="10000dp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
         android:text="Importar de galería"
         app:layout_constraintEnd_toEndOf="@+id/view2"
         app:layout_constraintTop_toTopOf="parent" />
@@ -139,6 +169,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fondoCamiseta" />
+
 
     <View
         android:id="@+id/view6"
@@ -187,7 +218,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="68dp"
         android:layout_marginEnd="32dp"
-        android:text="17,99$"
+        android:text="18,99$"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ImportarIma" />
@@ -200,6 +233,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="138dp"
         android:text="COMPRAR"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.125"
         app:layout_constraintStart_toStartOf="parent"

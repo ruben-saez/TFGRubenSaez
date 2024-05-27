@@ -63,6 +63,9 @@ class ImageListAdapter2(private val context: Context, private val bitmaps: List<
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
             val byteArray = stream.toByteArray()
             intent.putExtra("imagen_bitmap", byteArray)
+
+            intent.putExtra("correo_imagen", correos)
+
             context.startActivity(intent)
         }
 

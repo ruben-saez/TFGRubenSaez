@@ -6,7 +6,7 @@
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/fondo"
+        android:background="@drawable/fondoprueba5"
         tools:context="ComprarVenta.Pedidos">
     <View
         android:id="@+id/menuArriba"
@@ -31,18 +31,14 @@
         android:textSize="50sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-    <GridView
-        android:id="@+id/gridViewPedidos"
-        android:layout_width="0dp"
-        android:layout_height="566dp"
-        android:horizontalSpacing="8dp"
-        android:numColumns="2"
-        android:padding="8dp"
-        android:stretchMode="columnWidth"
-        android:verticalSpacing="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/menuArriba" />
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/menuArriba" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

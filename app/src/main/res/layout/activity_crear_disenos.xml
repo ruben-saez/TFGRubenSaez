@@ -113,13 +113,13 @@
         android:id="@+id/borrarBtn"
         android:layout_width="42dp"
         android:layout_height="34dp"
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="2dp"
         android:layout_marginEnd="4dp"
         android:background="@null"
         android:scaleType="fitXY"
         app:layout_constraintEnd_toStartOf="@+id/lineaBtn"
         app:layout_constraintTop_toBottomOf="@+id/menuArriba"
-        app:srcCompat="@drawable/linearecta" />
+        app:srcCompat="@drawable/papelera" />
 
     <ImageButton
         android:id="@+id/grosorBtn2"
@@ -163,5 +163,18 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/custom_view" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="86dp"
+        android:layout_height="70dp"
+        android:layout_gravity="start"
+        android:layout_marginTop="4dp"
+        android:elevation="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.018"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logosinfondo" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

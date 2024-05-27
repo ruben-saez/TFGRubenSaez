@@ -16,22 +16,26 @@ class SolicitudSoporte : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_solicitud_sporte)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_solicitud_sporte)
-
+        val correo = intent.getStringExtra("correo")
         binding.enviarTextoButton.setOnClickListener {
             val texto = binding.editTextTexto.text.toString().trim()
 
-            if (texto.isNotEmpty()) {
-                guardarTextoEnFirebase(texto)
+            if (texto.isNotEmpty() && correo != null) {
+                guardarTextoEnFirebase(texto, correo)
             } else {
                 Toast.makeText(this, "Por favor, ingresa un texto antes de enviar", Toast.LENGTH_SHORT).show()
             }
         }
 
     }
-    private fun guardarTextoEnFirebase(texto: String) {
+    private fun guardarTextoEnFirebase(texto: String, correo: String) {
+        val solicitud = mapOf(
+            "TextoSoporte" to texto,
+            "Correo" to correo
+        )
 
         db.collection("Soporte")
-            .add(mapOf("TextoSoporte" to texto))
+            .add(solicitud)
             .addOnSuccessListener {
                 Toast.makeText(this, "Enviado a soporte", Toast.LENGTH_SHORT).show()
                 binding.editTextTexto.text.clear()

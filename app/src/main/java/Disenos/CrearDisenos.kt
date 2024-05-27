@@ -114,7 +114,11 @@ class CrearDisenos : AppCompatActivity() {
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
         binding.borrarBtn.setOnClickListener {
-            customView.clearCanvas()
+            val correo = intent.getStringExtra("correo")
+            finish()
+            val intent = Intent(this@CrearDisenos, CrearDisenos::class.java)
+            intent.putExtra("correo", correo)
+            startActivity(intent)
         }
 
     }

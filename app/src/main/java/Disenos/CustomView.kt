@@ -130,10 +130,7 @@ class CustomView(context: Context, attrs: AttributeSet) : View(context, attrs) {
         return canvasBitmap
     }
 
-    fun clearCanvas() {
-        drawCanvas.drawColor(backgroundColor, PorterDuff.Mode.CLEAR)
-        invalidate()
-    }
+
 
     fun incrementStrokeWidth(increment: Float) {
         strokeWidth += increment

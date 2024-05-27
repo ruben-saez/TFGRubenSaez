@@ -11,18 +11,20 @@ import com.google.firebase.firestore.FirebaseFirestore
 import android.widget.GridView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import com.example.tfgrubensaez.databinding.ActivityMisDisenosBinding
+import com.example.tfgrubensaez.databinding.ActivityPedidosBinding
+
 import com.google.firebase.auth.FirebaseAuth
 
 class Pedidos : AppCompatActivity() {
-    lateinit var binding: ActivityMisDisenosBinding
+    lateinit var binding: ActivityPedidosBinding
     private lateinit var auth: FirebaseAuth
     private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pedidos)
 
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_mis_disenos)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_pedidos)
+
         auth = FirebaseAuth.getInstance()
         val correo = auth.currentUser?.email
 
@@ -53,7 +55,8 @@ class Pedidos : AppCompatActivity() {
                                 // Si ya has obtenido todos los datos, configura el adaptador
                                 if (bitmaps.size == documents.size()) {
                                     val adapter = ImageListAdapterPedido(this, bitmaps, contenidos)
-                                    binding.gridView.adapter = adapter
+                                    binding.listView.adapter = adapter
+
                                 }
                             }.addOnFailureListener { e ->
                                 Toast.makeText(this, "Error al descargar imagen: ${e.message}", Toast.LENGTH_SHORT).show()

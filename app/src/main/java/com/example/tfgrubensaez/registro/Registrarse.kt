@@ -97,11 +97,11 @@ class Registrarse : AppCompatActivity() {
                 if (documents.isEmpty) {
                     agregarUsuarioAColeccion(correo)
                 } else {
-                    Toast.makeText(this, "BIENVENIDO", Toast.LENGTH_SHORT).show()
+
                 }
             }
             .addOnFailureListener { e ->
-                Toast.makeText(this, "Error al verificar correo en la base de datos: ${e.message}", Toast.LENGTH_SHORT).show()
+
             }
     }
     private fun toggleMenu() {
@@ -140,13 +140,13 @@ class Registrarse : AppCompatActivity() {
                 .document(userId)
                 .set(nuevoUsuario)
                 .addOnSuccessListener {
-                    Toast.makeText(this, "Usuario agregado correctamente a la base de datos", Toast.LENGTH_SHORT).show()
+
                 }
                 .addOnFailureListener { e ->
-                    Toast.makeText(this, "Error al agregar usuario a la base de datos: ${e.message}", Toast.LENGTH_SHORT).show()
+
                 }
         } else {
-            Toast.makeText(this, "No se pudo obtener el usuario actual", Toast.LENGTH_SHORT).show()
+
         }
     }
     private fun cargarFotoPerfilGoogle() {
@@ -199,18 +199,15 @@ class Registrarse : AppCompatActivity() {
                                 }
                             }.addOnFailureListener { e ->
 
-                                Toast.makeText(this, "Error al descargar imagen: ${e.message}", Toast.LENGTH_SHORT).show()
                             }
                         }
                     }
                 } else {
 
-                    Toast.makeText(this, "No se encontraron datos de usuarios en Firestore", Toast.LENGTH_SHORT).show()
                 }
             }
             .addOnFailureListener { e ->
 
-                Toast.makeText(this, "Error al obtener datos de usuarios: ${e.message}", Toast.LENGTH_SHORT).show()
             }
     }
 }

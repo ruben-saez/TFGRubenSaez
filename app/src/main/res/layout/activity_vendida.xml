@@ -5,35 +5,50 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/fondo">
+        android:background="@drawable/fondoprueba5">
 
 
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="0dp"
             android:layout_height="256dp"
-            android:layout_marginTop="68dp"
+            android:layout_marginTop="32dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/logo" />
+            app:srcCompat="@drawable/logosinfondo" />
 
         <TextView
             android:id="@+id/TItulo2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="44dp"
+            android:layout_marginTop="4dp"
             android:fontFamily="@font/abril_fatface"
             android:gravity="center"
             android:text="¡Gracias por navegar en nuestro mar de opciones y comprar la camiseta perfecta para ti!"
             android:textColor="#142b53"
             android:textSize="20sp"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+        <Button
+            android:id="@+id/volver"
+            android:layout_width="118dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="156dp"
+            android:layout_marginTop="192dp"
+            android:layout_marginEnd="156dp"
+            android:text="VOLVER"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.526"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TItulo2" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -1,9 +1,12 @@
 package ComprarVenta
 
 import android.app.Activity
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
+import android.graphics.Typeface
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.net.Uri
@@ -12,9 +15,11 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
+import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
@@ -51,6 +56,26 @@ class Compra : AppCompatActivity() {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerColor.adapter = adapter
 
+// Establecer color blanco para el texto del spinner
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spinnerColor.adapter = object : ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, colors) {
+            override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+                val view = super.getView(position, convertView, parent)
+                val textView = view.findViewById<TextView>(android.R.id.text1)
+                textView.setTextColor(Color.WHITE)
+                textView.setTypeface(null, Typeface.BOLD)
+                return view
+            }
+
+            override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
+                val view = super.getDropDownView(position, convertView, parent)
+                val textView = view.findViewById<TextView>(android.R.id.text1)
+                textView.setTextColor(Color.BLACK)
+                return view
+            }
+        }
+
+// Manejar la selección del spinner
         binding.spinnerColor.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                 selectedColor = parent.getItemAtPosition(position).toString()
@@ -67,19 +92,37 @@ class Compra : AppCompatActivity() {
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
-              //Poner algo por si no se selecciona
+                // Aquí no necesitas poner nada, ya que no necesitas manejar el caso en que no se seleccione nada
             }
-
         }
-        val materials = arrayOf("Algodón", "Poliéster", "Lino","Seda") // Agrega los materiales que desees mostrar
+
+        val materials = arrayOf("Algodón", "Poliéster", "Lino", "Seda")
         val materialAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, materials)
         materialAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerMaterial.adapter = materialAdapter
+
+        materialAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spinnerMaterial.adapter = object : ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, materials) {
+            override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+                val view = super.getView(position, convertView, parent)
+                val textView = view.findViewById<TextView>(android.R.id.text1)
+                textView.setTextColor(Color.WHITE)
+                textView.setTypeface(null, Typeface.BOLD)
+                return view
+            }
+
+            override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
+                val view = super.getDropDownView(position, convertView, parent)
+                val textView = view.findViewById<TextView>(android.R.id.text1)
+                textView.setTextColor(Color.BLACK)
+                return view
+            }
+        }
         binding.spinnerMaterial.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                 selectedMaterial = parent.getItemAtPosition(position).toString()
 
-                var precioTotal = 17.99
+                var precioTotal = 18.99
 
                 // Ajustar el precio según el material seleccionado
                 when (selectedMaterial) {
@@ -141,29 +184,66 @@ class Compra : AppCompatActivity() {
             openGallery()
         }
         val tallas = arrayOf("XS", "S", "M", "L", "XL", "XXL", "XXXL")
+
         val tallasAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, tallas)
         tallasAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerTallas.adapter = tallasAdapter
 
+// Establecer color blanco para el texto del spinner
+        tallasAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spinnerTallas.adapter = object : ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, tallas) {
+            override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+                val view = super.getView(position, convertView, parent)
+                val textView = view.findViewById<TextView>(android.R.id.text1)
+                textView.setTextColor(Color.WHITE)
+                textView.setTypeface(null, Typeface.BOLD)
+                return view
+            }
+
+            override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
+                val view = super.getDropDownView(position, convertView, parent)
+                val textView = view.findViewById<TextView>(android.R.id.text1)
+                textView.setTextColor(Color.BLACK)
+                return view
+            }
+        }
         binding.spinnerTallas.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                 selectedTalla = parent.getItemAtPosition(position).toString()
-
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
-
+                // Aquí no necesitas poner nada, ya que no necesitas manejar el caso en que no se seleccione nada
             }
         }
-        val impresion = arrayOf( "Serigrafía", "Vinilo de transferencia térmica", "Impresión digital directa (DTG)", "Sublimación", "Transferencia de pantalla", "Bordado")
+        val impresion = arrayOf("Serigrafía", "Vinilo de transferencia térmica", "Impresión digital directa (DTG)", "Sublimación", "Transferencia de pantalla", "Bordado")
         val impresionAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, impresion)
         impresionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerImpresion.adapter = impresionAdapter
+
+// Establecer color blanco para el texto del spinner
+        impresionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spinnerImpresion.adapter = object : ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, impresion) {
+            override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+                val view = super.getView(position, convertView, parent)
+                val textView = view.findViewById<TextView>(android.R.id.text1)
+                textView.setTextColor(Color.WHITE)
+                textView.setTypeface(null, Typeface.BOLD)
+                return view
+            }
+
+            override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
+                val view = super.getDropDownView(position, convertView, parent)
+                val textView = view.findViewById<TextView>(android.R.id.text1)
+                textView.setTextColor(Color.BLACK)
+                return view
+            }
+        }
         binding.spinnerImpresion.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                 selectedImpresion = parent.getItemAtPosition(position).toString()
 
-                var precioTotal = 17.99
+                var precioTotal = 18.99
 
                 // Obtener el precio adicional del material seleccionado
                 val selectedMaterial = binding.spinnerMaterial.selectedItem.toString()
@@ -209,6 +289,8 @@ class Compra : AppCompatActivity() {
 
 
         binding.compra.setOnClickListener {
+            val correoVendedor  = intent.getStringExtra("correo_imagen")
+
             val auth = FirebaseAuth.getInstance()
             val usuarioActual = auth.currentUser
             if (usuarioActual != null) {
@@ -222,17 +304,19 @@ class Compra : AppCompatActivity() {
                         "Impresión: $selectedImpresion\n" +
                         "Precio total: $precioTotal"
 
-                guardarImagenCompraEnFirebase(correo!!, contenidoCorreo)
-
+                guardarImagenCompraEnFirebase(correo!!, contenidoCorreo, precioTotal,correoVendedor)
+                if (correoVendedor != null) {
+                    actualizarBeneficioUsuario(correoVendedor, precioTotal)
+                }
                 val intent = Intent(this@Compra, Vendida::class.java)
+                intent.putExtra("correo", correo)
                 startActivity(intent)
 
-
             } else {
-
                 Toast.makeText(this, "Usuario no autenticado", Toast.LENGTH_SHORT).show()
             }
         }
+
 
 
 
@@ -268,7 +352,7 @@ class Compra : AppCompatActivity() {
 
 
 
-    private fun guardarImagenCompraEnFirebase(correo: String, contenidoCorreo: String) {
+    private fun guardarImagenCompraEnFirebase(correo: String, contenidoCorreo: String, precioTotal: String, correoVendedor: String?) {
         val auth = FirebaseAuth.getInstance()
         val usuarioActual = auth.currentUser
 
@@ -291,11 +375,13 @@ class Compra : AppCompatActivity() {
 
                     val imageUrl = uri.toString()
 
-                    // Actualizar Firestore con la URL de la imagen
+                    // Actualizar Firestore con la URL de la imagen y otros datos
                     val datosPedido = hashMapOf(
                         "Correo" to correo,
                         "Contenido" to contenidoCorreo,
-                        "Imagen" to imageUrl
+                        "Imagen" to imageUrl,
+                        "Precio" to precioTotal,
+                        "CorreoVendedor" to correoVendedor
                     )
 
                     db.collection("Pedidos")
@@ -307,13 +393,42 @@ class Compra : AppCompatActivity() {
                             Toast.makeText(this, "Error al realizar el pedido: ${e.message}", Toast.LENGTH_SHORT).show()
                         }
 
-
-
-
                 }
             }
         }
     }
+
+
+    private fun actualizarBeneficioUsuario(correoVendedor: String, precioTotal: String) {
+        val db = FirebaseFirestore.getInstance()
+        val usuariosRef = db.collection("UsuariosTFG")
+
+        usuariosRef
+            .whereEqualTo("correo", correoVendedor) // Buscar al usuario con el correo del vendedor
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    val beneficioActual = document.getDouble("beneficio") ?: 0.0
+                    val precioTotalSinDolar = precioTotal.replace("$", "")
+                    val nuevoBeneficio = beneficioActual + precioTotalSinDolar.toDouble()
+
+
+                    // Actualizar el campo "beneficio" del documento con el nuevo valor
+                    document.reference.update("beneficio", nuevoBeneficio)
+                        .addOnSuccessListener {
+                            }
+                        .addOnFailureListener { e ->
+                            Toast.makeText(this, "Error al actualizar el beneficio para el usuario con correo: $correoVendedor", Toast.LENGTH_SHORT).show()
+                        }
+                }
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "Error al obtener el documento del usuario con correo: $correoVendedor", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+
+
 
     private fun bitmapToByteArray(bitmap: Bitmap): ByteArray {
         val stream = ByteArrayOutputStream()
